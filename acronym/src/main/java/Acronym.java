@@ -8,10 +8,9 @@ class Acronym {
 
     String get() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < phrase.length(); i++) {
-            if (i == 0 || !Character.isLetter(phrase.charAt(i - 1)) && Character.isLetter(phrase.charAt(i)))
-                sb.append(phrase.charAt(i));
-        }
+        String[] words = phrase.split("\\W+");
+        for (String word : words)
+            sb.append(word.charAt(0));
         return sb.toString().toUpperCase();
     }
 
