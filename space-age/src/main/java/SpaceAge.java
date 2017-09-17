@@ -1,6 +1,27 @@
-class SpaceAge {
+enum Planet {
+    MERCURY (0.2408467),
+    VENUS (0.61519726),
+    EARTH (1.0),
+    MARS (1.8808158),
+    JUPITER (11.862615),
+    SATURN (29.447498),
+    URANUS (84.016846),
+    NEPTUNE (164.79132);
 
     private final static double SECONDS_IN_YEAR  = 31_557_600;
+    private final double ratio;
+
+    Planet(double ratio) {
+        this.ratio = ratio;
+    }
+
+    double toSpaceAge(double seconds) {
+        return seconds / SECONDS_IN_YEAR / ratio;
+    }
+}
+
+class SpaceAge {
+
     private final double seconds;
 
     SpaceAge(double seconds) {
@@ -12,35 +33,35 @@ class SpaceAge {
     }
 
     double onEarth() {
-        return seconds / SECONDS_IN_YEAR;
+        return Planet.EARTH.toSpaceAge(seconds);
     }
 
     double onMercury() {
-        return onEarth() / 0.2408467;
+        return Planet.MERCURY.toSpaceAge(seconds);
     }
 
     double onVenus() {
-        return onEarth() / 0.61519726;
+        return Planet.VENUS.toSpaceAge(seconds);
     }
 
     double onMars() {
-        return onEarth() / 1.8808158;
+        return Planet.MARS.toSpaceAge(seconds);
     }
 
     double onJupiter() {
-        return onEarth() / 11.862615;
+        return Planet.JUPITER.toSpaceAge(seconds);
     }
 
     double onSaturn() {
-        return onEarth() / 29.447498;
+        return Planet.SATURN.toSpaceAge(seconds);
     }
 
     double onUranus() {
-        return onEarth() / 84.016846;
+        return Planet.URANUS.toSpaceAge(seconds);
     }
 
     double onNeptune() {
-        return onEarth() / 164.79132;
+        return Planet.NEPTUNE.toSpaceAge(seconds);
     }
 
 }
