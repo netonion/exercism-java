@@ -4,17 +4,15 @@ import static java.util.Collections.reverse;
 
 class HandshakeCalculator {
 
-    private static final int doReverse = 16;
-
     List<Signal> calculateHandshake(int number) {
 
         List<Signal> list = new ArrayList<Signal>();
 
         for (Signal s : Signal.values()) {
-            if ((number & s.getCode()) != 0) list.add(s);
+            if ((number & 1) == 1) list.add(s);
+            number >>= 1;
         }
-
-        if ((number & doReverse) != 0) reverse(list);
+        if ((number & 1) == 1) reverse(list);
 
         return list;
     }
