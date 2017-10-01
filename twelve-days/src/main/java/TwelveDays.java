@@ -1,3 +1,5 @@
+import java.util.StringJoiner;
+
 class TwelveDays {
 
     private final String[] VERSES = {
@@ -20,13 +22,10 @@ class TwelveDays {
     }
 
     public String verses(int startVerse, int endVerse) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = startVerse; i < endVerse; i++) {
-            sb.append(verse(i));
-            sb.append("\n");
-        }
-        sb.append(verse(endVerse));
-        return sb.toString();
+        StringJoiner sj = new StringJoiner("\n");
+        for (int i = startVerse; i <= endVerse; i++)
+            sj.add(verse(i));
+        return sj.toString();
     }
 
     public String sing() {
