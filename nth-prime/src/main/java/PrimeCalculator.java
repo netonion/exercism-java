@@ -9,7 +9,7 @@ class PrimeCalculator {
         while (count < n) {
             candidate++;
             boolean isPrime = true;
-            for (int factor = 2; factor <= Math.sqrt(candidate); factor++) {
+            for (int factor = 2; factor * factor <= candidate; factor++) {
                 if (candidate % factor == 0) {
                     isPrime = false;
                     break;
