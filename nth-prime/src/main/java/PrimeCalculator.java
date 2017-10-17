@@ -1,26 +1,23 @@
-import java.util.ArrayList;
-
 class PrimeCalculator {
 
     public int nth(int n) {
 
         if (n < 1) throw new IllegalArgumentException();
 
-        ArrayList<Integer> primes = new ArrayList<Integer>();
-
+        int count = 1;
         int candidate = 2;
-        while (primes.size() < n) {
+        while (count < n) {
+            candidate++;
             boolean isPrime = true;
-            for (Integer prime : primes) {
-                if (candidate % prime == 0) {
+            for (int factor = 2; factor <= Math.sqrt(candidate); factor++) {
+                if (candidate % factor == 0) {
                     isPrime = false;
                     break;
                 }
             }
-            if (isPrime) primes.add(candidate);
-            candidate++;
+            if (isPrime) count++;
         }
 
-        return primes.get(n - 1);
+        return candidate;
     }
 }
