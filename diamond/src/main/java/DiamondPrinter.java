@@ -6,8 +6,8 @@ class DiamondPrinter {
         ArrayList<String> diamond = new ArrayList<String>();
         for (char row = 'A'; row <= target; row++)
             diamond.add(buildRow(row, target));
-        for (char row = (char)(target - 1); row >= 'A'; row--)
-            diamond.add(buildRow(row, target));
+        for (int i = target - 1 - 'A'; i >= 0; i--)
+            diamond.add(diamond.get(i));
         return diamond;
     }
 
