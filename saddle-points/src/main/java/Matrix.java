@@ -6,26 +6,42 @@ class Matrix {
 
     private final Set<MatrixCoordinate> saddlePoints = new HashSet<MatrixCoordinate>();
 
+    /*
+    Record the max of each row and the min
+    of each column and compare with each element. Runtime is O(mn)
+    */
     public Matrix(List<List<Integer>> matrix) {
 
-        if (matrix.size() == 0) return;
+        if (matrix.isEmpty()) return;
 
-        for (int i = 0; i < matrix.size(); i++) {
-            for (int j = 0; j < matrix.get(i).size(); j++) {
+        int m = matrix.size();
+        int n = matrix.get(0).size();
 
-                boolean minRow = true;
-                boolean maxCol = true;
+        int[] maxinums = new int[m];
+        int[] mininums = new int[n];
 
-                for (int x = 0; x < matrix.size(); x++) {
-                    if (x != i && matrix.get(x).get(j) < matrix.get(i).get(j))
-                        minRow = false;
-                }
-                for (int y = 0; y < matrix.get(i).size(); y++) {
-                    if (y != j && matrix.get(i).get(y) > matrix.get(i).get(j))
-                        maxCol = false;
-                }
+        for (int i = 0; i < m; i++) {
+            int max = matrix.get(i).get(0);
+            for (int j = 1; j < n; j++) {
+                int val = matrix.get(i).get(j);
+                if (val > max) max = val;
+            }
+            maxinums[i] = max;
+        }
 
-                if (minRow && maxCol)
+        for (int j = 0; j < n; j++) {
+            int min = matrix.get(0).get(j);
+            for (int i = 1; i < m; i++) {
+                int val = matrix.get(i).get(j);
+                if (val < min) min = val;
+            }
+            mininums[j] = min;
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int val = matrix.get(i).get(j);
+                if (val == maxinums[i] && val == mininums[j])
                     saddlePoints.add(new MatrixCoordinate(i, j));
             }
         }
