@@ -42,7 +42,6 @@ public class MatrixTest {
         assertEquals(expectedSaddlePoints, matrix.getSaddlePoints());
     }
 
-    @Ignore("Remove to run test")
     @Test
     public void testCanIdentifyMultipleSaddlePoints() {
         Matrix matrix = new Matrix(Arrays.asList(
