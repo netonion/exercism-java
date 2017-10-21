@@ -1,14 +1,15 @@
 import java.util.List;
-import java.util.ArrayList;
+import java.util.stream.IntStream;
+import java.util.stream.Collectors;
 
 class Series {
 
-    private List<Integer> digits = new ArrayList<>();
+    private List<Integer> digits;
 
     public Series(String series) {
-        for (char digit : series.toCharArray()) {
-            digits.add(digit - '0');
-        }
+        digits = series.chars()
+            .map(Character::getNumericValue).boxed()
+            .collect(Collectors.toList());
     }
 
     public List<Integer> getDigits() {
@@ -19,10 +20,8 @@ class Series {
         if (n > digits.size())
             throw new IllegalArgumentException();
 
-        List<List<Integer>> res = new ArrayList<>();
-        for (int i = 0; i <= digits.size() - n; i++) {
-            res.add(digits.subList(i, i + n));
-        }
-        return res;
+        return IntStream.rangeClosed(0, digits.size() - n)
+            .mapToObj(i -> digits.subList(i, i + n))
+            .collect(Collectors.toList());
     }
 }
