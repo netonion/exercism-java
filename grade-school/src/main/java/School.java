@@ -17,8 +17,13 @@ class School {
         if (!grades.containsKey(grade)) {
             grades.put(grade, new LinkedList<String>());
         }
-        grades.get(grade).add(name);
-        Collections.sort(grades.get(grade));
+        // O(n) insert. Should be better than Collections.sort()
+        int i = 0;
+        for (String other : grades.get(grade)) {
+            if (other.compareTo(name) > -1) break;
+            i++;
+        }
+        grades.get(grade).add(i, name);
         size++;
     }
 
