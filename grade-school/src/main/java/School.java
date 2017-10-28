@@ -7,7 +7,7 @@ import java.util.Collections;
 class School {
 
     private int size = 0;
-    private HashMap<Integer, LinkedList<String>> grades = new HashMap<>();
+    private HashMap<Integer, List<String>> grades = new HashMap<>();
 
     public int numberOfStudents() {
         return size;
@@ -23,14 +23,10 @@ class School {
     }
 
     public List<String> grade(int grade) {
-        if (grades.containsKey(grade)) {
-            return (List<String>)(grades.get(grade).clone());
-        } else {
-            return new LinkedList<String>();
-        }
+        return Collections.unmodifiableList(grades.getOrDefault(grade, Collections.emptyList()));
     }
 
     public Map<Integer, List<String>> studentsByGradeAlphabetical() {
-        return (Map<Integer, List<String>>)grades.clone();
+        return Collections.unmodifiableMap(grades);
     }
 }
