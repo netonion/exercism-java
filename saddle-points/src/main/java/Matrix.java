@@ -40,8 +40,7 @@ class Matrix {
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                int val = matrix.get(i).get(j);
-                if (val == maxinums[i] && val == mininums[j])
+                if (maxinums[i] == mininums[j])
                     saddlePoints.add(new MatrixCoordinate(i, j));
             }
         }
